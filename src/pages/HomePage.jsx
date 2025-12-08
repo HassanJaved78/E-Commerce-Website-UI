@@ -1,11 +1,13 @@
-import TopHeader from "../components/layout/TopHeader"
-import Header from "../components/layout/header"
+import TopHeader from "../components/TopHeader";
+import Header from "../components/Header";
+import FirstLayout from "../layout/FirstLayout";
 
 export default function HomePage() {
     return (
         <>
             <TopHeader />
             <Header />
+            <FirstLayout />
         </>
     )
 }
