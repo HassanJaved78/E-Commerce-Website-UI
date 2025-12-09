@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import img from "../assets/images/Promotion Img.svg";
+import img from "../../assets/images/Promotion Img.svg";
 
 const images = [
     img,
@@ -36,7 +36,7 @@ export default function PromotionBanner() {
     }, []);
 
     return (
-        <section className="w-full sm:w-4/5 bg-amber-400">
+        <section className="w-full md:w-4/5">
             <div 
                 className="relative overflow-clip w-full aspect-3/1 h-full"
             >
