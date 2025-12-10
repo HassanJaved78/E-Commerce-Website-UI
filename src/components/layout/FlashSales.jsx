@@ -1,19 +1,26 @@
-import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline"
 import ProductCard from "../common/ProductCard";
+import SectionHeading from "../common/SectionHeading";
+import { useRef } from "react";
+import LeftRightArrows from "../common/LeftRightArrows";
+
+import Button from "../common/Button";
 
 export default function FlashSales() {
+
+    const sliderRef = useRef(null);
+
     return (
-        <section className="flex flex-col gap-10">
-            <div className="w-4/5 mx-auto mt-20">
-                <div className="flex items-center gap-3">
-                    <div className="w-5 h-10 rounded-sm bg-[#DB4444]"></div>
-                    <p className="font-semibold text-[#DB4444]">Today's</p>
-                </div>
+        <section className="flex flex-col items-center gap-10 max-md:px-2 py-16 max-md:py-8 border-b border-black/20">
+            <div className="w-full md:w-4/5 mx-auto">
+            {/* main div */}
+                <SectionHeading text="Today's" />
  
-                <div className="justify-between flex items-baseline-last gap-20">
+                <div className="justify-between flex flex-col sm:flex-row sm:items-baseline-last gap-4 sm:gap-20">
+                    {/* sales and time div */}
                     <h1 className="text-4xl font-medium font-serif tracking-wide">Flash Sales</h1>
                     
                     <div className="flex grow items-center gap-3">
+                        {/* Time div */}
                         <div className="flex flex-col">
                             <span className="text-xs tracking-tight">Days</span>
                             <span className=" text-4xl font-bold">03</span>
@@ -50,27 +57,24 @@ export default function FlashSales() {
                         </div>
                     </div>
 
-                    <div className="flex gap-3">
-                        {/* scroll buttons */}
-                        <div className="rounded-full cursor-pointer bg-[#F5F5F5] p-2">
-                            <ArrowLeftIcon className="w-6 h-6" />
-                        </div>
-
-                        <div className="rounded-full cursor-pointer bg-[#F5F5F5] p-2">
-                            <ArrowRightIcon className="w-6 h-6" />
-                        </div>
-    
-                    </div>
+                    {/* scroll buttons */}
+                    <LeftRightArrows ref={sliderRef} />
                 </div>
             </div>
 
-            <div className="w-4/5 mx-auto flex gap-8 overflow-hidden">
+            <div ref={sliderRef} className="w-full max-sm:overflow-x-scroll md:w-4/5 mx-auto flex gap-8 overflow-x-hidden scroll-smooth">
+                {/* Products div */}
+                
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
+            </div>
+
+            <div>
+                <Button text="View All Products" />
             </div>
         </section>
     )

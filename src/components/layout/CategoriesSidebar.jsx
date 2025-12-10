@@ -3,7 +3,7 @@ const cat = ["Woman's Fashion","Men's Fashion", "Electronics", "Home & Lifestyle
 
 export default function CategoriesSidebar() {
     return (
-        <aside className="hidden overflow-y-auto md:flex w-1/5 border-r border-black/20">
+        <aside className="min-w-44 hidden overflow-y-auto md:flex w-1/5 border-r border-black/20">
             <div className="h-full">
                 <ul className="h-full flex flex-col justify-between gap-1 font-serif 2xl: py-2">
                     {cat.map((category, index) => (

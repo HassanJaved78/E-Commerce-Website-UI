@@ -6,7 +6,7 @@ const rating = 4;
 
 export default function ProductCard() {
     return (
-        <div className="inline-block group">
+        <div className="w-[270px] inline-block group">
             
             {/* Image block */}
             <div className="relative">
@@ -40,7 +40,8 @@ export default function ProductCard() {
                 <div className="flex flex-row items-center">
                     {
                         Array.from({length: 5}).map((_, index) => (
-                            <StarIcon 
+                            <StarIcon  
+                                key={index}
                                 className={`w-5 h-5 
                                             ${index < rating ? "text-yellow-300" : "text-gray-300" }`}
                             />
