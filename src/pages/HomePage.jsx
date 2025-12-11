@@ -6,6 +6,7 @@ import Categories from "../components/layout/Categories";
 import BestSellingProducts from "../components/layout/BestSellingProducts";
 import ExploreProducts from "../components/layout/ExploreProducts";
 import NewArrival from "../components/layout/NewArrival";
+import Footer from "../components/common/Footer";
 
 export default function HomePage() {
     return (
@@ -18,6 +19,7 @@ export default function HomePage() {
             <BestSellingProducts />
             <ExploreProducts />
             <NewArrival />
+            <Footer />
         </>
     )
 }
