@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import img from "../../assets/images/Promotion Img.svg";
 
+import { ArrowRightIcon } from "@heroicons/react/16/solid";
+
 const images = [
     img,
     "https://images.unsplash.com/photo-1549213821-4708d624e1d1?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fDE2JTNBOXxlbnwwfHwwfHx8MA%3D%3D",
@@ -66,6 +68,15 @@ export default function PromotionBanner() {
                     onClick={next}
                 >
                     <ChevronRightIcon className="w-4 h-6" />
+                </button>
+
+                <button className="z-20 cursor-pointer absolute left-4 bottom-4 text-white bg-transparent">
+                    <p className="flex items-end gap-1">
+                        <span className="underline underline-offset-4">Shop now</span>
+                        <span>
+                            <ArrowRightIcon className="w-4 h-4 mb-0.5" />
+                        </span>
+                    </p>
                 </button>
 
                 <div className="absolute left-1/2 bottom-2 z-50 flex gap-2">
