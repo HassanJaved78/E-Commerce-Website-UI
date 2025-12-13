@@ -19,7 +19,7 @@ const services = [
 
 export default function Services() {
     return (
-        <div className="w-4/5 mx-auto flex justify-between">
+        <div className="w-4/5 mx-auto flex justify-between my-8 ">
             {
                 services.map((service, index) => (
                     <div className="flex flex-col justify-between items-center gap-2 text-center" key={index}>

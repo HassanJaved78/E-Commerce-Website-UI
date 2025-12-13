@@ -15,7 +15,7 @@ const dropDownItems = [
   {
     name: "Manage My Account",
     icon: <UserIcon />,
-    onclick: "ggg",
+    onClick: "",
   },
   {
     name: "My Order",
@@ -32,7 +32,7 @@ const dropDownItems = [
         />
       </svg>
     ),
-    function: "",
+    onClick: "",
   },
   {
     name: "My Cancellations",
@@ -49,7 +49,7 @@ const dropDownItems = [
         />
       </svg>
     ),
-    function: "",
+    onClick: "",
   },
   {
     name: "My Reviews",
@@ -59,7 +59,7 @@ const dropDownItems = [
   {
     name: "Logout",
     icon: <ArrowLeftEndOnRectangleIcon />,
-    function: "",
+    onClick: "",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function Header() {
   }
 
   return (
-    <nav className="relative box-border border-b border-black/20 flex sm:w-4/5 mt-2 justify-between items-center mx-auto p-2 font-serif gap-4 md:gap-12">
+    <nav className="relative box-border border-b border-off border-black/20 flex sm:w-4/5 mt-2 justify-between items-center mx-auto p-2 font-serif gap-4 md:gap-12">
       <div className="relative flex flex-1 lg:flex-2 w-3/4 flex-rows justify-between items-center gap-1 sm:flex-row sm:gap-4">
         <p className="flex-1 w-2/5 font-bold text-2xl">Exclusive</p>
         <ul 
@@ -141,10 +141,26 @@ export default function Header() {
           ))}
         </div>
 
-        <Bars3Icon
-          className={`w-6 h-6 cursor-pointer sm:hidden`}
-          onClick={toggleMobileMenu}
-        />
+        <div className="relative w-6 h-6 sm:hidden">
+          {/* Bars icon */}
+          <Bars3Icon
+            onClick={toggleMobileMenu}
+            className={`absolute inset-0 w-6 h-6 cursor-pointer
+              transition-all duration-300 ease-in-out
+              ${mobileMenu ? "opacity-0 scale-75 rotate-90" : "opacity-100 scale-100 rotate-0"}
+            `}
+          />
+
+          {/* X icon */}
+          <XMarkIcon
+            onClick={toggleMobileMenu}
+            className={`absolute inset-0 w-6 h-6 cursor-pointer
+              transition-all duration-300 ease-in-out
+              ${mobileMenu ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-75 -rotate-90"}
+            `}
+          />
+        </div>
+
       </div>
     </nav>
   );
