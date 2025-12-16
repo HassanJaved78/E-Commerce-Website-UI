@@ -18,12 +18,12 @@ export default function BestSellingProducts() {
 
             <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-around lg:justify-between space-y-8 overflow-hidden">
                 {Array.from({length: 4}).map((_, index) => (
-                    <ProductCard key={index} />
+                    <ProductCard key={index} showWishlist={true} showView={true} />
                 ))}
             </div>
 
             <div className="flex justify-center">
-                <Button className="max-[]" text="View All" />
+                <Button className="" text="View All" />
             </div>
 
         </div>

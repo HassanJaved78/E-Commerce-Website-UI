@@ -65,12 +65,12 @@ export default function FlashSales() {
             <div ref={sliderRef} className="w-full max-sm:overflow-x-scroll md:w-4/5 mx-auto flex gap-8 overflow-x-hidden scroll-smooth">
                 {/* Products div */}
                 
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
-                <ProductCard />
+                <ProductCard showView={true} showWishlist={true} />
+                <ProductCard showView={true} showWishlist={true} />
+                <ProductCard showView={true} showWishlist={true} />
+                <ProductCard showView={true} showWishlist={true} />
+                <ProductCard showView={true} showWishlist={true} />
+                <ProductCard showView={true} showWishlist={true} />
             </div>
 
             <div>

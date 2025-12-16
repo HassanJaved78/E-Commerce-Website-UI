@@ -19,7 +19,7 @@ export default function ExploreProducts() {
                     {
                         Array.from({length: 8}).map((_, index) => {
                             return (
-                                <ProductCard key={index} />
+                                <ProductCard key={index} showWishlist={true} showView={true} />
                             )
                         })
                     }

@@ -1,12 +1,13 @@
 import ControllerImg from "../../assets/images/GameController.png";
 import { StarIcon } from "@heroicons/react/16/solid";
-import { HeartIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { HeartIcon, EyeIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 const rating = 4;
 
-export default function ProductCard() {
+export default function ProductCard({ showWishlist, showView, showDelete }) {
+    
     return (
-        <div className="w-[270px] inline-block group">
+        <div className="w-[270px] group">
             
             {/* Image block */}
             <div className="relative">
@@ -21,12 +22,21 @@ export default function ProductCard() {
                 </div>
 
                 <div className="space-y-2 absolute top-2 right-2">
-                    <div className="cursor-pointer rounded-full bg-white p-2">
-                        <HeartIcon className="w-6 h-6"/> 
-                    </div>
-                    <div className="cursor-pointer rounded-full bg-white p-2">
-                        <EyeIcon className="w-6 h-6"/> 
-                    </div>
+                    {showWishlist && 
+                        <div className="cursor-pointer rounded-full bg-white p-2">
+                            <HeartIcon className="w-6 h-6"/> 
+                        </div>
+                    }
+                    {showView && 
+                        <div className="cursor-pointer rounded-full bg-white p-2">
+                            <EyeIcon className="w-6 h-6"/>
+                        </div> 
+                    }
+                    {showDelete && 
+                        <div className="cursor-pointer rounded-full bg-white p-2">
+                            <TrashIcon className="w-6 h-6"/>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -37,6 +47,7 @@ export default function ProductCard() {
                     <span className="text-[#DB4444]">$120</span>
                     <span className="text-black/50 line-through">$190</span>
                 </p>
+                {!showDelete &&
                 <div className="flex flex-row items-center">
                     {
                         Array.from({length: 5}).map((_, index) => (
@@ -50,6 +61,7 @@ export default function ProductCard() {
 
                     <p className="ml-2 text-black/50">(88)</p>
                 </div>
+                }
             </div>
         </div>
     )
