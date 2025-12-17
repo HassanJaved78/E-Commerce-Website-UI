@@ -6,6 +6,8 @@ import Contact from './pages/Contact';
 import Wishlist from './pages/WishList';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import MyAccount from './pages/MyAccount';
+import ProductDetails from './pages/ProductDetails';
 
 function App() {
 
@@ -17,7 +19,9 @@ function App() {
       {/* <Contact /> */}
       {/* <Wishlist /> */}
       {/* <CartPage /> */}
-      <CheckoutPage />
+      {/* <CheckoutPage /> */}
+      {/* <MyAccount /> */}
+      <ProductDetails />
     </>
   )
 }
