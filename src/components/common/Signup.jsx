@@ -1,6 +1,9 @@
 import Button from "./Button"
 
+import { Link } from "react-router-dom"
+
 export default function SignUp() {
+
     return (
         <form className="w-full tablet:w-80 lg:w-96 flex flex-col gap-8">
             <div className="flex flex-col gap-4">
@@ -39,7 +42,9 @@ export default function SignUp() {
 
             <p className="text-center space-x-2">
                 <span>Already have account?</span>
-                <span className="border-b pb-0.5 font-medium">Log in</span>
+                <span className="border-b pb-0.5 font-medium">
+                    <Link to="/auth/login">Log in</Link>
+                </span>
             </p>
         
         </form>

@@ -18,7 +18,7 @@ export default function JustForYou() {
 
             </div>
 
-            <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-around lg:justify-between gap-y-8 overflow-hidden">
+            <div className="flex items-center flex-wrap justify-around lg:justify-between gap-y-8 overflow-hidden">
                 {Array.from({length: 5}).map((_, index) => (
                     <ProductCard showView={true} key={index} />
                 ))}

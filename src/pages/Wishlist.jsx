@@ -18,7 +18,7 @@ export default function Wishlist() {
                         <TransparentButton text="Move All To Bag" />
                     </div>
 
-                    <div className="flex flex-wrap gap-2 justify-between space-y-8">
+                    <div className="flex items-center flex-wrap justify-around lg:justify-between gap-y-8 overflow-hidden">
                         {
                             Array.from({length: 5}).map((_, index) => (
                                 <ProductCard key={index} showDelete={true} />

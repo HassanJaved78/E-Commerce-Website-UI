@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import {
   MagnifyingGlassIcon,
@@ -11,11 +12,13 @@ import {
   StarIcon,
 } from "@heroicons/react/24/outline";
 
-const dropDownItems = [
+export default function Header() {
+
+  const dropDownItems = [
   {
     name: "Manage My Account",
     icon: <UserIcon />,
-    onClick: "",
+    onClick: () => navigate("/account"),
   },
   {
     name: "My Order",
@@ -63,9 +66,10 @@ const dropDownItems = [
   },
 ];
 
-export default function Header() {
   const [dropDown, setDropDown] = useState("close");
   const [mobileMenu, setMobileMenu] = useState(false);
+
+  const navigate = useNavigate();
 
   function toggleDropDown() {
     if (dropDown === "close") {
@@ -79,28 +83,53 @@ export default function Header() {
     setMobileMenu(!mobileMenu);
   }
 
+  const navLinkStyleClass = ({ isActive }) =>
+                `cursor-pointer underline-offset-2 hover:underline ${
+                  isActive ? "underline decoration-[#DB4444] decoration-2" : ""
+                } `
+
   return (
     <nav className="relative box-border border-b border-off border-black/20 flex sm:w-4/5 mt-2 justify-between items-center mx-auto p-2 font-serif gap-4 md:gap-12">
       <div className="relative flex flex-1 lg:flex-2 w-3/4 flex-rows justify-between items-center gap-1 sm:flex-row sm:gap-4">
         <p className="flex-1 w-2/5 font-bold text-2xl">Exclusive</p>
-        <ul 
+        <ul
           className={`flex-2 sm:w-3/5 
           ${mobileMenu ? "flex justify-center gap-6" : "hidden"} 
           absolute w-dvw top-13
           sm:static
           sm:flex flex-row gap-2 items-center text-base sm:justify-around xl:justify-center xl:gap-8 sm:flex-row`}
         >
-          <li className="cursor-pointer underline-offset-2 hover:underline">
-            Home
+          <li>
+            <NavLink
+              className={navLinkStyleClass}
+              to="/"
+            >
+              Home
+            </NavLink>
           </li>
-          <li className="cursor-pointer underline-offset-2 hover:underline">
-            Contact
+          <li>
+            <NavLink
+              className={navLinkStyleClass}
+              to="/contact"
+            >
+              Contact
+            </NavLink>
           </li>
-          <li className="cursor-pointer underline-offset-2 hover:underline">
-            About
+          <li>
+            <NavLink
+              className={navLinkStyleClass}
+              to="/about"
+            >
+              About
+            </NavLink>
           </li>
-          <li className="cursor-pointer underline-offset-2 hover:underline">
-            SignUp
+          <li>
+            <NavLink
+              className={navLinkStyleClass}
+              to="/auth/signup"
+            >
+              SignUp
+            </NavLink>
           </li>
         </ul>
       </div>
@@ -115,8 +144,8 @@ export default function Header() {
           <MagnifyingGlassIcon className="w-6 h-6 cursor-pointer text-black" />
         </div>
 
-        <HeartIcon className="w-6 h-6 cursor-pointer text-black hover:fill-current" />
-        <ShoppingCartIcon className="w-6 h-6 cursor-pointer stroke-current text-black hover:fill-current" />
+        <HeartIcon onClick={() => navigate("/wishlist")} className="w-6 h-6 cursor-pointer text-black hover:fill-current" />
+        <ShoppingCartIcon onClick={() => navigate("/cart")} className="w-6 h-6 cursor-pointer stroke-current text-black hover:fill-current" />
         <UserIcon
           onClick={toggleDropDown}
           className={`${
@@ -134,6 +163,7 @@ export default function Header() {
             <div
               className="flex items-center gap-2 cursor-pointer hover:indent-1"
               key={index}
+              onClick={item.onClick}
             >
               <div className="w-6 h-6">{item.icon}</div>
               <p className="text-sm">{item.name}</p>
@@ -147,7 +177,11 @@ export default function Header() {
             onClick={toggleMobileMenu}
             className={`absolute inset-0 w-6 h-6 cursor-pointer
               transition-all duration-300 ease-in-out
-              ${mobileMenu ? "opacity-0 scale-75 rotate-90" : "opacity-100 scale-100 rotate-0"}
+              ${
+                mobileMenu
+                  ? "opacity-0 scale-75 rotate-90"
+                  : "opacity-100 scale-100 rotate-0"
+              }
             `}
           />
 
@@ -156,11 +190,14 @@ export default function Header() {
             onClick={toggleMobileMenu}
             className={`absolute inset-0 w-6 h-6 cursor-pointer
               transition-all duration-300 ease-in-out
-              ${mobileMenu ? "opacity-100 scale-100 rotate-0" : "opacity-0 scale-75 -rotate-90"}
+              ${
+                mobileMenu
+                  ? "opacity-100 scale-100 rotate-0"
+                  : "opacity-0 scale-75 -rotate-90"
+              }
             `}
           />
         </div>
-
       </div>
     </nav>
   );

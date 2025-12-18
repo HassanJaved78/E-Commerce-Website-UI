@@ -11,7 +11,7 @@ export default function FlashSales() {
 
     return (
         <section className="flex flex-col items-center gap-10 max-md:px-2 py-16 max-md:py-8 border-b border-black/20">
-            <div className="w-full md:w-4/5 mx-auto">
+            <div className="w-full sm:w-4/5 mx-auto">
             {/* main div */}
                 <SectionHeading text="Today's" />
  
@@ -31,7 +31,7 @@ export default function FlashSales() {
                             <div className="border-2 rounded-full"></div>
                         </div>
 
-                        <div className="flex flex-col before:content">
+                        <div className="flex flex-col">
                             <span className="text-xs tracking-tight">Hours</span>
                             <span className=" text-4xl font-bold">23</span>
                         </div>
@@ -62,7 +62,7 @@ export default function FlashSales() {
                 </div>
             </div>
 
-            <div ref={sliderRef} className="w-full max-sm:overflow-x-scroll md:w-4/5 mx-auto flex gap-8 overflow-x-hidden scroll-smooth">
+            <div ref={sliderRef} className="w-full max-sm:overflow-x-scroll sm:w-4/5 mx-auto flex gap-8 overflow-x-hidden scroll-smooth">
                 {/* Products div */}
                 
                 <ProductCard showView={true} showWishlist={true} />

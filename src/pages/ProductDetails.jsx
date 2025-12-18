@@ -41,6 +41,7 @@ const sizes = ["XS", "S", "M", "L", "XL"];
 export default function ProductDetails() {
 
     const [activeImg, setActiveimg] = useState(4);
+    const [selectedSize, setSelectedSize] = useState(0);
     let rating = 4;    
 
     return (
@@ -49,26 +50,26 @@ export default function ProductDetails() {
             <Header />
 
             <section className="p-2 sm:p-6 min-h-dvh flex flex-col items-center justify-center">
-                <div className="md:w-4/5 mx-auto flex flex-col md:flex-row gap-3">
+                <div className="md:w-4/5 mx-auto flex flex-col md:flex-row gap-3 md:gap-8">
                     <div className="md:w-3/5 flex flex-col-reverse md:flex-row gap-3">
                         <div className="flex md:w-1/6 md:flex-col gap-3">
                             {/* all pictures on side */}
                             {
                                 productImages.map((image, index) => ( 
-                                    image.name !== productImages[activeImg].name &&
-                                        <div className="bg-[#F5F5F5] max-w-fit box-border p-2" key={index}>
+                                    // image.name !== productImages[activeImg].name &&
+                                        <div onClick={() => {setActiveimg(index)}} className= {`bg-[#F5F5F5] max-w-fit box-border p-2 cursor-pointer border rounded-xs ${activeImg === index ? "border-red-500" : "" }`} key={index}>
                                             <img className="w-30 h-28 object-contain" src={image.img} alt={image.name} />
                                         </div>
                                 ))
                             }
                         </div>
 
-                        <div className="md:w-5/6 bg-[#F5F5F5] flex place-content-center">
+                        <div className="max-md:h-80 md:w-5/6 bg-[#F5F5F5] flex place-content-center">
                             <img className="object-contain w-9/10 max-w-80" src={productImages[activeImg].img} alt={productImages[activeImg].name} />
                         </div>
                     </div>
 
-                    <div className="md:w-2/5 mt-8 md:mt-0 flex flex-col gap-4">
+                    <div className="md:w-2/5 mt-8 md:mt-0 flex flex-col justify-between gap-4">
                         {/* details */}
                         <h2 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h2>
 
@@ -115,7 +116,7 @@ export default function ProductDetails() {
                             <p className="text-xl">Size:</p>
                             {
                                 sizes.map((size, index) => (
-                                    <button key={index} className="border p-1 rounded-sm text-sm w-7 mx-1">{size}</button>
+                                    <button onClick={() => {setSelectedSize(index)}} key={index} className={`border p-1 cursor-pointer rounded-sm text-sm w-7 mx-1 ${index === selectedSize ? "bg-[#DB4444] text-white" : "" } `}>{size}</button>
                                 ))
                             }
                         </div>
@@ -134,7 +135,7 @@ export default function ProductDetails() {
                             </div>
 
                             <div className="flex-1 mx-2">
-                                <button className="text-base cursor-pointer px-10 text-white bg-[#DB4444] hover:bg-[#E07575] p-2 rounded-sm w-full">Buy Now</button>
+                                <button className="text-base cursor-pointer text-white bg-[#DB4444] hover:bg-[#E07575] p-2 rounded-sm w-full">Buy Now</button>
                             </div>
 
                             <div className="flex items-center border border-black/50 rounded-sm p-1">

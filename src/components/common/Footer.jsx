@@ -2,6 +2,8 @@ import AppStoreImg from "../../assets/images/Footer/appstore.png";
 import GooglePlayImg from "../../assets/images/Footer/googleplay.svg";
 import QRCodeImg from "../../assets/images/Footer/qrcode.png";
 
+import { useNavigate } from "react-router-dom";
+
 const logos = [
     {
         name: "facebook",
@@ -22,6 +24,9 @@ const logos = [
 ]
 
 export default function Footer() {
+
+    const navigate = useNavigate();
+
     return (
         <section className="w-full bg-black text-white py-2">
             <div className="w-full sm:w-4/5 mx-auto space-y-6 my-20 gap-6 flex flex-col max-sm:items-center flex-wrap sm:flex-row sm:justify-between">
@@ -61,11 +66,11 @@ export default function Footer() {
 
                 <div className="flex flex-col gap-2 flex-wrap w-36 max-sm:min-w-1/2">
                     <h2 className="text-xl font-medium">Account</h2>
-                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2">My Account</p>
-                    <p className="text-base font-normal hover:underline underline-offset-2">Login / Register</p>
-                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2">Cart</p>
-                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2">Wishlist</p>
-                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2">Shop</p>
+                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2" onClick={() => navigate("/account")}>My Account</p>
+                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2" onClick={() => navigate("/auth/login")}>Login / Register</p>
+                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2" onClick={() => navigate("/cart")}>Cart</p>
+                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2" onClick={() => navigate("/wishlist")}>Wishlist</p>
+                    <p className="text-base font-normal cursor-pointer hover:underline underline-offset-2" onClick={() => navigate("/")}>Shop</p>
                 </div>
 
                 <div className="flex flex-col gap-2 flex-wrap w-36 max-sm:min-w-1/2">

@@ -7,13 +7,13 @@ const rating = 4;
 export default function ProductCard({ showWishlist, showView, showDelete }) {
     
     return (
-        <div className="w-[270px] group">
+        <div className="w-[162px] md:w-[270px] group">
             
             {/* Image block */}
             <div className="relative">
-                <p className="absolute top-3 left-3 text-xs inline-block p-2 rounded-sm bg-[#DB4444] w-14 text-white text-center">-40%</p>
+                <p className="absolute md:top-3 md:left-3 text-xs inline-block p-1 md:p-2 rounded-sm bg-[#DB4444] w-14 text-white text-center">-40%</p>
 
-                <div className="flex justify-center items-center w-[270px] h-[250px] bg-[#F5F5F5]">
+                <div className="flex justify-center items-center w-[162px] h-[150px] md:w-[270px] md:h-[250px] bg-[#F5F5F5]">
                     <img src={ControllerImg} alt="controller" />
                 </div>
 
@@ -21,20 +21,20 @@ export default function ProductCard({ showWishlist, showView, showDelete }) {
                     <p>Add To Cart</p>
                 </div>
 
-                <div className="space-y-2 absolute top-2 right-2">
+                <div className="space-y-2 absolute top-1 right-0 md:top-2 md:right-2">
                     {showWishlist && 
-                        <div className="cursor-pointer rounded-full bg-white p-2">
-                            <HeartIcon className="w-6 h-6"/> 
+                        <div className="cursor-pointer rounded-full w-fit bg-white p-2">
+                            <HeartIcon className="w-4 h-4 md:w-6 md:h-6"/> 
                         </div>
                     }
                     {showView && 
-                        <div className="cursor-pointer rounded-full bg-white p-2">
-                            <EyeIcon className="w-6 h-6"/>
+                        <div className="cursor-pointer rounded-full w-fit bg-white p-2">
+                            <EyeIcon className="w-4 h-4 md:w-6 md:h-6"/>
                         </div> 
                     }
                     {showDelete && 
-                        <div className="cursor-pointer rounded-full bg-white p-2">
-                            <TrashIcon className="w-6 h-6"/>
+                        <div className="cursor-pointer rounded-full w-fit bg-white p-2">
+                            <TrashIcon className="w-4 h-4 md:w-6 md:h-6"/>
                         </div>
                     }
                 </div>

@@ -4,6 +4,8 @@ import Footer from "../components/common/Footer";
 import Button from "../components/common/Button";
 import TransparentButton from "../components/common/TransparentButton";
 
+import { useNavigate } from "react-router-dom";
+
 import GameController from "../assets/images/GameController.png";
 import LCDMonitor from "../assets/images/LCDMonitor.png"
 
@@ -48,6 +50,9 @@ const cartItems = [
                     </div> */}
 
 export default function CartPage() {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <TopHeader />
@@ -129,7 +134,7 @@ export default function CartPage() {
                             <p>$1750</p>
                         </div>
                         <div className="text-center mt-6">
-                        <Button text="Proceed To Checkout" />
+                        <Button onClick={() => navigate("/checkout")} text="Proceed To Checkout" />
                         </div>
                     </div>
                 </div>

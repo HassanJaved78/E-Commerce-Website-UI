@@ -16,7 +16,7 @@ export default function BestSellingProducts() {
                 </h1>
             </div>
 
-            <div className="flex flex-col items-center sm:flex-row sm:flex-wrap sm:justify-around lg:justify-between space-y-8 overflow-hidden">
+            <div className="flex flex-wrap items-center justify-between gap-y-8 overflow-hidden">
                 {Array.from({length: 4}).map((_, index) => (
                     <ProductCard key={index} showWishlist={true} showView={true} />
                 ))}
