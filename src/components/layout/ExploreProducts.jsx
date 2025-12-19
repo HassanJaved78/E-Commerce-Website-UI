@@ -1,9 +1,22 @@
-import SectionHeading from "../common/SectionHeading"
-import ProductCard from "../common/ProductCard"
-import Button from "../common/Button"
-import { useEffect } from "react"
+import SectionHeading from "../common/SectionHeading";
+import ProductCard from "../common/ProductCard";
+import Button from "../common/Button";
+
+import { useGetProductsQuery } from "../../app/services/products/productsApi";
 
 export default function ExploreProducts() {
+
+    const { data: products , isLoading, isError } = useGetProductsQuery();
+
+    if(isLoading) {
+        return(
+            <div>Loading ...</div>
+        )
+    }
+
+    if (isError) {
+        return <div>Failed to load products</div>;
+    }
 
     return (
         <section className="w-full py-8 md:py-16">
@@ -19,11 +32,10 @@ export default function ExploreProducts() {
 
                 <div className="grid place-items-center grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] xl:grid-cols-[1fr_1fr_1fr_1fr] gap-y-8">
                     {
-                        Array.from({length: 8}).map((_, index) => {
-                            return (
-                                <ProductCard key={index} showWishlist={true} showView={true} />
-                            )
-                        })
+                        products.map((product) => 
+                            <ProductCard key={product.id} showWishlist={true} showView={true} product={product} />
+                        )
+
                     }
                 </div>
 

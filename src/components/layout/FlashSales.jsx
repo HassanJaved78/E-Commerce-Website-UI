@@ -3,11 +3,25 @@ import SectionHeading from "../common/SectionHeading";
 import { useRef } from "react";
 import LeftRightArrows from "../common/LeftRightArrows";
 
+import { useGetProductsQuery } from "../../app/services/products/productsApi";
+
 import Button from "../common/Button";
 
 export default function FlashSales() {
-
+    
     const sliderRef = useRef(null);
+
+    const { data: products, isError, isLoading } = useGetProductsQuery();
+
+    if(isLoading) {
+        return(
+            <div>Loading ...</div>
+        )
+    }
+
+    if (isError) {
+        return <div>Failed to load products</div>;
+    }
 
     return (
         <section className="flex flex-col items-center gap-10 max-md:px-2 py-16 max-md:py-8 border-b border-black/20">
@@ -64,13 +78,11 @@ export default function FlashSales() {
 
             <div ref={sliderRef} className="w-full max-sm:overflow-x-scroll sm:w-4/5 mx-auto flex gap-8 overflow-x-hidden scroll-smooth">
                 {/* Products div */}
-                
-                <ProductCard showView={true} showWishlist={true} />
-                <ProductCard showView={true} showWishlist={true} />
-                <ProductCard showView={true} showWishlist={true} />
-                <ProductCard showView={true} showWishlist={true} />
-                <ProductCard showView={true} showWishlist={true} />
-                <ProductCard showView={true} showWishlist={true} />
+                {
+                    products.map((product, index) => (
+                        <ProductCard key={index} product={product} showView={true} showWishlist={true} />
+                    ))
+                }
             </div>
 
             <div>

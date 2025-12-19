@@ -2,46 +2,60 @@ import Footer from "../components/common/Footer";
 import Header from "../components/common/Header";
 import TopHeader from "../components/common/TopHeader";
 
-import ProductImg1 from "../assets/images/ProductImages/image1.png";
-import ProductImg2 from "../assets/images/ProductImages/image2.png";
-import ProductImg3 from "../assets/images/ProductImages/image3.png";
-import ProductImg4 from "../assets/images/ProductImages/image4.png";
-import ProductImg5 from "../assets/images/ProductImages/image5.png";
+// import ProductImg1 from "../assets/images/ProductImages/image1.png";
+// import ProductImg2 from "../assets/images/ProductImages/image2.png";
+// import ProductImg3 from "../assets/images/ProductImages/image3.png";
+// import ProductImg4 from "../assets/images/ProductImages/image4.png";
+// import ProductImg5 from "../assets/images/ProductImages/image5.png";
 import { useState } from "react";
+
+import { useParams } from "react-router-dom";
+import { useGetProductByIdQuery } from "../app/services/products/productsApi";
 
 import { StarIcon } from "@heroicons/react/16/solid";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import RelatedItems from "../components/layout/RelatedItems";
 
-const productImages = [
-    {
-        name: "image1",
-        img: ProductImg1
-    },
-    {
-        name: "image2",
-        img: ProductImg2
-    },
-    {
-        name: "image3",
-        img: ProductImg3
-    },
-    {
-        name: "image4",
-        img: ProductImg4
-    },
-    {
-        name: "image5",
-        img: ProductImg5
-    }
-]
+import { addToWishlist } from "../app/features/wishlist/wishlistSlice";
+import { useDispatch } from "react-redux";
+// const productImages = [
+//     {
+//         name: "image1",
+//         img: ProductImg1
+//     },
+//     {
+//         name: "image2",
+//         img: ProductImg2
+//     },
+//     {
+//         name: "image3",
+//         img: ProductImg3
+//     },
+//     {
+//         name: "image4",
+//         img: ProductImg4
+//     },
+//     {
+//         name: "image5",
+//         img: ProductImg5
+//     }
+// ]
 
 const sizes = ["XS", "S", "M", "L", "XL"];
 
 export default function ProductDetails() {
-
-    const [activeImg, setActiveimg] = useState(4);
+    const [activeImg, setActiveimg] = useState(0);
     const [selectedSize, setSelectedSize] = useState(0);
+
+    const { id } = useParams();
+    const { data: product, isError, isLoading } = useGetProductByIdQuery(id);
+    const dispatch = useDispatch();
+    if(isLoading) {
+        return (
+            <p>Loading</p>
+        )
+    }
+
     let rating = 4;    
 
     return (
@@ -55,23 +69,23 @@ export default function ProductDetails() {
                         <div className="flex md:w-1/6 md:flex-col gap-3">
                             {/* all pictures on side */}
                             {
-                                productImages.map((image, index) => ( 
+                                product.images.map((image, index) => ( 
                                     // image.name !== productImages[activeImg].name &&
                                         <div onClick={() => {setActiveimg(index)}} className= {`bg-[#F5F5F5] max-w-fit box-border p-2 cursor-pointer border rounded-xs ${activeImg === index ? "border-red-500" : "" }`} key={index}>
-                                            <img className="w-30 h-28 object-contain" src={image.img} alt={image.name} />
+                                            <img className="w-30 h-28 object-contain" src={image} alt={product.title} />
                                         </div>
                                 ))
                             }
                         </div>
 
                         <div className="max-md:h-80 md:w-5/6 bg-[#F5F5F5] flex place-content-center">
-                            <img className="object-contain w-9/10 max-w-80" src={productImages[activeImg].img} alt={productImages[activeImg].name} />
+                            <img className="object-contain w-9/10 max-w-80" src={product.images[activeImg]} alt={product.title} />
                         </div>
                     </div>
 
                     <div className="md:w-2/5 mt-8 md:mt-0 flex flex-col justify-between gap-4">
                         {/* details */}
-                        <h2 className="text-2xl font-semibold">Havic HV G-92 Gamepad</h2>
+                        <h2 className="text-2xl font-semibold">{product.title}</h2>
 
                         <div className="flex">
                             <div>
@@ -95,10 +109,10 @@ export default function ProductDetails() {
                             </div>
                         </div>
 
-                        <p className="text-2xl">$192.00</p>
+                        <p className="text-2xl">${product.price}</p>
 
                         <p className="text-sm text-justify">
-                            PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.
+                            {product.description}
                         </p>
 
                         <hr />
@@ -138,7 +152,7 @@ export default function ProductDetails() {
                                 <button className="text-base cursor-pointer text-white bg-[#DB4444] hover:bg-[#E07575] p-2 rounded-sm w-full">Buy Now</button>
                             </div>
 
-                            <div className="flex items-center border border-black/50 rounded-sm p-1">
+                            <div onClick={() => dispatch(addToWishlist(product))} className="cursor-pointer flex items-center border border-black/50 rounded-sm p-1">
                                 <HeartIcon className="w-6 h-6" />
                             </div>
 

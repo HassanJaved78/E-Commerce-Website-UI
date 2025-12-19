@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import { useSelector } from "react-redux";
+
 import {
   MagnifyingGlassIcon,
   HeartIcon,
@@ -13,6 +15,9 @@ import {
 } from "@heroicons/react/24/outline";
 
 export default function Header() {
+
+  const cartItems = useSelector((state) => state.cart.products);
+  const wishlistItems = useSelector((state) => state.wishlist.products);
 
   const dropDownItems = [
   {
@@ -35,7 +40,7 @@ export default function Header() {
         />
       </svg>
     ),
-    onClick: "",
+    onClick: () => {},
   },
   {
     name: "My Cancellations",
@@ -52,7 +57,7 @@ export default function Header() {
         />
       </svg>
     ),
-    onClick: "",
+    onClick: () => {},
   },
   {
     name: "My Reviews",
@@ -62,7 +67,7 @@ export default function Header() {
   {
     name: "Logout",
     icon: <ArrowLeftEndOnRectangleIcon />,
-    onClick: "",
+    onClick: () => {},
   },
 ];
 
@@ -144,8 +149,21 @@ export default function Header() {
           <MagnifyingGlassIcon className="w-6 h-6 cursor-pointer text-black" />
         </div>
 
-        <HeartIcon onClick={() => navigate("/wishlist")} className="w-6 h-6 cursor-pointer text-black hover:fill-current" />
-        <ShoppingCartIcon onClick={() => navigate("/cart")} className="w-6 h-6 cursor-pointer stroke-current text-black hover:fill-current" />
+        <div className="relative">
+          <div className="absolute -top-1 -right-1 text-xs bg-[#DB4444] rounded-full w-4 h-4 flex items-center justify-center">
+            <p>{wishlistItems.length}</p>
+          </div>
+          <HeartIcon onClick={() => navigate("/wishlist")} className="w-6 h-6 cursor-pointer text-black hover:fill-current" />
+        </div>
+        
+        
+        <div className="relative">
+          <div className="absolute -top-1 -right-1 text-xs bg-[#DB4444] rounded-full w-4 h-4 flex items-center justify-center">
+            <p>{cartItems.length}</p>
+          </div>
+          <ShoppingCartIcon onClick={() => navigate("/cart")} className="w-6 h-6 cursor-pointer stroke-current text-black hover:fill-current" />
+        </div>
+
         <UserIcon
           onClick={toggleDropDown}
           className={`${

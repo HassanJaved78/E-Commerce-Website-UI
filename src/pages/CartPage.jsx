@@ -4,54 +4,41 @@ import Footer from "../components/common/Footer";
 import Button from "../components/common/Button";
 import TransparentButton from "../components/common/TransparentButton";
 
+import { clearCart, adjustQuantity } from "../app/features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+
 import { useNavigate } from "react-router-dom";
-
-import GameController from "../assets/images/GameController.png";
-import LCDMonitor from "../assets/images/LCDMonitor.png"
-
-const cartItems = [
-    {
-        img: LCDMonitor,
-        name: "LCD Monitor",
-        price: 650,
-        quantity: 1,
-        total: 650
-    },
-    {
-        img: GameController,
-        name: "H1 Gamepad",
-        price: 550,
-        quantity: 2,
-        total: 1100
-    }
-]
-
-{/* <div className="grid grid-cols-[2fr_1fr_1fr_100px] lg:grid-cols-[1fr_1fr_1fr_100px] font-serif gap-x-4 gap-y-12 items-center">
-                        
-                        <p>Product</p>
-                        <p>Price</p>
-                        <p>Quantity</p>
-                        <p>Subtotal</p>
-                        
-                        {
-                            cartItems.map((item, index) => (
-                                <>
-                                    <div className="flex items-center gap-4">
-                                        <img className="w-12 h-12" src={item.img} alt={item.name} />
-                                        <p>{item.name}</p>
-                                    </div>
-                                    <p>${item.price}</p>
-                                    <input className="w-14 px-2 border border-black/40 rounded-sm p-1" type="number" value={item.quantity} />
-                                    <p>${item.total}</p>
-                                </>
-                            ))
-                        }
-
-                    </div> */}
+import { useSelector } from "react-redux";
 
 export default function CartPage() {
 
+    const cartItems = useSelector((state) => state.cart.products);
+
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleChange = (e) => {
+        const id = parseInt(e.target.id);
+        let quantity = parseInt(e.target.value);
+
+        if (quantity < 1) {
+            const confirmDelete = window.confirm(
+                "Quantity is 1. Do you want to remove this item from the cart?"
+            );
+            if (confirmDelete) {
+                quantity = 0; // this will remove the item
+            } else {
+                quantity = 1; // keep it at 1
+            }
+        }
+
+        dispatch(adjustQuantity({ id, quantity }));
+    };
+
+
+
+    const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
 
     return (
         <>
@@ -65,9 +52,9 @@ export default function CartPage() {
                         <thead>
                             <tr className="border-b border-black/10">
                                 <td className="py-6">Product</td>
-                                <td className="py-6">Price</td>
-                                <td className="py-6 text-center">Quantity</td>
-                                <td className="py-6 text-right pr-2">Subtotal</td>
+                                <td className="py-6 px-1 text-center">Price</td>
+                                <td className="py-6 px-1 text-center">Quantity</td>
+                                <td className="py-6 px-1 text-right pr-2">Subtotal</td>
                             </tr>
                         </thead>
 
@@ -78,32 +65,35 @@ export default function CartPage() {
                                         <div className="flex items-center gap-4">
                                             <img
                                                 className="w-12 h-12"
-                                                src={item.img}
-                                                alt={item.name}
+                                                src={item.images[0]}
+                                                alt={item.title}
                                             />
-                                            <p>{item.name}</p>
+                                            <p>{item.title}</p>
                                         </div>
                                     </td>
 
-                                    <td className="py-6">${item.price}</td>
+                                    <td className="py-6 text-center">${item.price}</td>
 
                                     <td className="py-6 text-center">
                                         <input
                                             type="number"
+                                            id={item.id}
                                             value={item.quantity}
+                                            min={0}
+                                            onChange={handleChange}
                                             className="w-14 px-2 border border-black/40 rounded-sm p-1"
                                         />
                                     </td>
 
-                                    <td className="text-right py-6 pr-2">${item.total}</td>
+                                    <td className="text-right py-6 pr-2">${item.price * item.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
 
                     <div className="flex justify-between">
-                        <TransparentButton text="Return To Shop" />
-                        <TransparentButton text="Update Cart" />
+                        <TransparentButton onClick={() => navigate("/")} text="Return To Shop" />
+                        <TransparentButton onClick={() => dispatch(clearCart()) } text="Clear Cart" />
                     </div>
                 </div>
                 
@@ -121,7 +111,7 @@ export default function CartPage() {
 
                         <div className="flex justify-between border-b border-black/40 py-2">
                             <p>Subtotal:</p>
-                            <p>$1750</p>
+                            <p>${subtotal}</p>
                         </div>
 
                         <div className="flex justify-between border-b border-black/40 py-2">
@@ -131,7 +121,7 @@ export default function CartPage() {
 
                         <div className="flex justify-between border-b border-black/40 py-2">
                             <p>Total:</p>
-                            <p>$1750</p>
+                            <p>${subtotal}</p>
                         </div>
                         <div className="text-center mt-6">
                         <Button onClick={() => navigate("/checkout")} text="Proceed To Checkout" />

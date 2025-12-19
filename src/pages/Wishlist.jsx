@@ -5,7 +5,12 @@ import ProductCard from "../components/common/ProductCard";
 import JustForYou from "../components/layout/JustForYou.jsx";
 import TransparentButton from "../components/common/TransparentButton.jsx";
 
+import { useSelector } from "react-redux";
+
 export default function Wishlist() {
+
+    const wislistItems = useSelector((state) => state.wishlist.products);
+
     return (
         <>
             <TopHeader />
@@ -20,8 +25,9 @@ export default function Wishlist() {
 
                     <div className="flex items-center flex-wrap justify-around lg:justify-between gap-y-8 overflow-hidden">
                         {
-                            Array.from({length: 5}).map((_, index) => (
-                                <ProductCard key={index} showDelete={true} />
+                            wislistItems.length < 1 ? <p>Wishlist is empty</p> : 
+                            wislistItems.map((product, index) => (
+                                <ProductCard key={index} showDelete={true} product={product} />
                             ))
                         }
                     </div>

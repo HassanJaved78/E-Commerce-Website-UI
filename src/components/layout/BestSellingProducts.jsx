@@ -2,7 +2,27 @@ import SectionHeading from "../common/SectionHeading"
 import Button from "../common/Button";
 import ProductCard from "../common/ProductCard";
 
+import { useGetProductsQuery } from "../../app/services/products/productsApi";
+
 export default function BestSellingProducts() {
+
+    const { data, isError, isLoading, isSuccess } = useGetProductsQuery();
+    let products = [];
+
+    if(isLoading) {
+        return(
+            <div>Loading ...</div>
+        )
+    }
+
+    if (isError) {
+        return <div>Failed to load products</div>;
+    }
+
+    if(isSuccess) {
+        products = data.slice(1, 5);
+    }
+
     return (
       <section className="py-8 md:py-16">
         <div className="relative w-full sm:w-4/5 mx-auto flex flex-col gap-10">
@@ -17,8 +37,8 @@ export default function BestSellingProducts() {
             </div>
 
             <div className="flex flex-wrap items-center justify-between gap-y-8 overflow-hidden">
-                {Array.from({length: 4}).map((_, index) => (
-                    <ProductCard key={index} showWishlist={true} showView={true} />
+                {products.map((product, index) => (
+                    <ProductCard key={index} showWishlist={true} showView={true} product={product} />
                 ))}
             </div>
 

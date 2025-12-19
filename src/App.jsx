@@ -49,6 +49,9 @@ const router = createBrowserRouter([
     {
       path: "account",
       element: <MyAccount />
+    },{
+      path: "product/:id",
+      element: <ProductDetails />
     }
 ]);
 
