@@ -17,7 +17,9 @@ import { HeartIcon } from "@heroicons/react/24/outline";
 import RelatedItems from "../components/layout/RelatedItems";
 
 import { addToWishlist } from "../app/features/wishlist/wishlistSlice";
+import { addToCart } from "../app/features/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 // const productImages = [
 //     {
 //         name: "image1",
@@ -49,7 +51,10 @@ export default function ProductDetails() {
 
     const { id } = useParams();
     const { data: product, isError, isLoading } = useGetProductByIdQuery(id);
+
     const dispatch = useDispatch();
+    const naviagte = useNavigate();
+
     if(isLoading) {
         return (
             <p>Loading</p>
@@ -141,7 +146,7 @@ export default function ProductDetails() {
                                     -
                                 </button>
 
-                                <p className="border-y p-1.5 px-3">2</p>
+                                <p className="border-y p-1.5 px-3">1</p>
 
                                 <button className="border p-1.5 px-3 rounded-r-sm hover:bg-[#DB4444] hover:text-white">
                                     +
@@ -149,7 +154,14 @@ export default function ProductDetails() {
                             </div>
 
                             <div className="flex-1 mx-2">
-                                <button className="text-base cursor-pointer text-white bg-[#DB4444] hover:bg-[#E07575] p-2 rounded-sm w-full">Buy Now</button>
+                                <button onClick={() => {
+                                    dispatch(addToCart(product));
+                                    naviagte("/cart")
+                                }} 
+                                className="text-base cursor-pointer text-white bg-[#DB4444] hover:bg-[#E07575] p-2 rounded-sm w-full"
+                                >
+                                    Buy Now
+                                </button>
                             </div>
 
                             <div onClick={() => dispatch(addToWishlist(product))} className="cursor-pointer flex items-center border border-black/50 rounded-sm p-1">
