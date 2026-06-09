@@ -92,20 +92,20 @@ npm run build
 ### Home page
 ![Home page](screenshots/Home%20page.png)
 
-### Product catalog
-![Product catalog](screenshots/Product%20catalog.png)
-
 ### Categories and best selling
 ![Categories and Best selling](screenshots/Categories%20and%20Best%20selling.png)
+
+### Product catalog
+![Product catalog](screenshots/Product%20catalog.png)
 
 ### Promotion items
 ![Promotion items](screenshots/Promotion%20items.png)
 
 ### Footer
+![Footer](screenshots/Footer.png)
 
 ### Product details
 ![Product details](screenshots/Product%20details.png)
-![Footer](screenshots/Footer.png)
 
 ### Wishlist
 ![Wishlist](screenshots/Wishlist.png)
@@ -115,9 +115,6 @@ npm run build
 
 ### Checkout page
 ![Checkout page](screenshots/Checkout%20Page.png)
-
-
-
 
 ## Recommended Improvements
 
